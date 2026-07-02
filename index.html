@@ -15,6 +15,7 @@
     --gray-700:#4a534f;
     --gray-300:#d8ded9;
     --gray-100:#f4f6f4;
+    --page-bg:#e9ece8;
     --white:#ffffff;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -127,8 +128,8 @@
   .section-head h2{font-size:32px;font-weight:700;color:var(--deep-green);margin-bottom:16px;}
   .section-head p{color:var(--gray-700);font-size:15.5px;max-width:560px;margin:0 auto;}
 
-  /* About */
-  .about{background:var(--gray-100);}
+  /* About / Services / Contact pages share one background */
+  .about, #services, #contact{background:var(--page-bg);}
   .about-grid{
     display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:10px;
   }

@@ -55,6 +55,7 @@
     transition:color .2s;
   }
   nav a:hover{color:var(--deep-green);}
+  nav a.active{color:var(--deep-green);font-weight:700;}
   .nav-cta{
     background:var(--deep-green);color:var(--white);
     padding:10px 22px;border-radius:4px;font-size:14px;font-weight:500;
@@ -63,9 +64,22 @@
   .nav-cta:hover{background:var(--deep-green-2);}
   .menu-toggle{display:none;font-size:26px;background:none;border:none;color:var(--deep-green);cursor:pointer;}
 
+  /* Page sections: only one visible at a time (click-based navigation, no long scroll) */
+  .page-section{display:none;margin-top:74px;}
+  .page-section.active{display:block;}
+  .page-section.page-enter{animation:pageEnter .45s ease;}
+  @keyframes pageEnter{
+    from{opacity:0;transform:translateY(24px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .back-home{
+    display:inline-flex;align-items:center;gap:6px;
+    color:var(--gold);font-weight:700;font-size:14px;margin-bottom:28px;
+  }
+  .back-home:hover{opacity:.8;}
+
   /* Hero */
   .hero{
-    margin-top:74px;
     background:linear-gradient(135deg, var(--deep-green) 0%, #0b241b 100%);
     color:var(--white);
     padding:110px 0 100px;
@@ -127,6 +141,19 @@
   .about-card h3{font-size:19px;font-weight:700;color:var(--deep-green);margin-bottom:12px;}
   .about-card p{font-size:14.5px;color:var(--gray-700);}
 
+  /* Extra explanatory blocks (shared) */
+  .extra{margin-top:80px;}
+  .extra-title{font-size:22px;font-weight:700;color:var(--deep-green);text-align:center;margin-bottom:36px;}
+
+  /* Process steps (About) */
+  .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .process-step{
+    background:var(--white);border:1px solid var(--gray-300);border-radius:8px;padding:28px 22px;
+  }
+  .process-step .step-num{color:var(--gold);font-weight:700;font-size:13px;letter-spacing:1px;display:block;margin-bottom:10px;}
+  .process-step h4{font-size:16.5px;font-weight:700;color:var(--deep-green);margin-bottom:8px;}
+  .process-step p{font-size:13.5px;color:var(--gray-700);}
+
   /* Services */
   .services-grid{
     display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
@@ -149,25 +176,62 @@
   .service-card h3{font-size:18px;font-weight:700;color:var(--deep-green);margin-bottom:12px;}
   .service-card p{font-size:14px;color:var(--gray-700);}
 
+  /* Recommended for (Services) */
+  .recommend{
+    background:var(--gray-100);border-radius:8px;padding:40px 44px;
+  }
+  .recommend-list li{
+    position:relative;padding-left:24px;font-size:15px;color:var(--gray-700);
+    margin-bottom:14px;
+  }
+  .recommend-list li:last-child{margin-bottom:0;}
+  .recommend-list li::before{
+    content:'';position:absolute;left:0;top:9px;
+    width:8px;height:8px;border-radius:50%;background:var(--gold);
+  }
+
+  /* Company intro (extra description before representative, with blurred office photo accent) */
+  .intro{background:var(--gray-100);position:relative;overflow:hidden;}
+  .intro-photo-mask{
+    position:absolute;top:-12%;right:-10%;
+    width:560px;height:560px;
+    background-image:url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80');
+    background-size:cover;background-position:center;
+    filter:blur(5px) brightness(0.85);
+    opacity:0.4;
+    clip-path:polygon(22% 0%, 100% 0%, 100% 78%, 78% 100%, 0% 100%, 0% 22%);
+    pointer-events:none;
+  }
+  .intro-inner{position:relative;z-index:1;max-width:720px;margin:0 auto;text-align:center;}
+  .intro-eyebrow{color:var(--gold);font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;display:block;}
+  .intro-inner h2{font-size:28px;font-weight:700;color:var(--deep-green);margin-bottom:18px;}
+  .intro-inner p{color:var(--gray-700);font-size:15.5px;margin-bottom:32px;}
+  .intro-stats{display:flex;gap:32px;flex-wrap:wrap;justify-content:center;}
+  .intro-stats .stat strong{display:block;font-size:26px;font-weight:900;color:var(--deep-green);}
+  .intro-stats .stat span{font-size:13.5px;color:var(--gray-700);}
+
   /* Representative */
-  .rep{background:var(--deep-green);color:var(--white);}
+  .rep{
+    background:linear-gradient(135deg, var(--deep-green) 0%, #0b241b 100%);
+    color:var(--white);scroll-margin-top:74px;
+  }
   .rep-grid{
     display:grid;grid-template-columns:280px 1fr;gap:56px;align-items:center;
   }
   .rep-photo{
     width:100%;aspect-ratio:3/4;border-radius:8px;
-    background:linear-gradient(160deg, #24614a, #0b241b);
+    background:rgba(255,255,255,0.08);
     display:flex;align-items:center;justify-content:center;
-    color:rgba(255,255,255,0.5);font-size:14px;
-    border:1px solid rgba(255,255,255,0.15);
+    color:rgba(255,255,255,0.55);font-size:14px;
+    border:1px solid rgba(255,255,255,0.25);
   }
   .rep-eyebrow{color:var(--gold);font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;display:block;}
-  .rep-grid h2{font-size:30px;font-weight:700;margin-bottom:8px;}
-  .rep-role{color:rgba(255,255,255,0.65);font-size:15px;margin-bottom:28px;}
+  .rep-grid h2{font-size:30px;font-weight:700;margin-bottom:8px;color:var(--white);}
+  .rep-role{color:rgba(255,255,255,0.75);font-size:15px;margin-bottom:28px;}
   .rep-list{display:flex;flex-direction:column;gap:16px;}
   .rep-list li{
-    display:flex;gap:14px;font-size:15px;color:rgba(255,255,255,0.9);
-    padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.12);
+    display:flex;gap:14px;font-size:15px;color:var(--white);
+    padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.2);
   }
   .rep-list li:last-child{border-bottom:none;padding-bottom:0;}
   .rep-list .tag{
@@ -210,6 +274,17 @@
   }
   .form-submit:hover{background:var(--deep-green-2);}
 
+  /* FAQ (Contact) */
+  .faq-list{max-width:760px;margin:0 auto;}
+  .faq-item{
+    border-bottom:1px solid var(--gray-300);padding:22px 4px;
+  }
+  .faq-item:first-child{padding-top:0;}
+  .faq-q{
+    font-size:15.5px;font-weight:700;color:var(--deep-green);margin-bottom:8px;
+  }
+  .faq-a{font-size:14.5px;color:var(--gray-700);}
+
   /* Footer */
   footer{
     background:#0b1f17;color:rgba(255,255,255,0.6);
@@ -221,18 +296,42 @@
   .footer-inner strong{color:var(--white);}
 
   @media(max-width:860px){
-    nav, .nav-cta{display:none;}
+    .nav-cta{display:none;}
     .menu-toggle{display:block;}
+    nav{
+      display:block;
+      position:absolute;top:74px;left:0;right:0;
+      background:var(--white);
+      border-bottom:1px solid var(--gray-300);
+      box-shadow:0 12px 24px rgba(18,53,40,0.1);
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .3s ease;
+    }
+    header.nav-open nav{
+      max-height:400px;
+    }
+    nav ul{flex-direction:column;gap:0;padding:8px 0;}
+    nav a{
+      display:block;padding:15px 24px;font-size:16px;
+      border-bottom:1px solid var(--gray-100);
+    }
+    nav li:last-child a{border-bottom:none;}
     .hero h1{font-size:32px;}
     .about-grid{grid-template-columns:1fr;}
     .services-grid{grid-template-columns:repeat(2,1fr);}
     .rep-grid{grid-template-columns:1fr;}
     .rep-photo{max-width:220px;margin:0 auto;}
+    .intro-photo-mask{width:340px;height:340px;top:-8%;right:-14%;}
+    .intro-stats{gap:24px;}
     .contact-grid{grid-template-columns:1fr;}
+    .process-grid{grid-template-columns:1fr 1fr;}
+    .recommend{padding:32px 26px;}
     section{padding:70px 0;}
   }
   @media(max-width:480px){
     .services-grid{grid-template-columns:1fr;}
+    .process-grid{grid-template-columns:1fr;}
   }
 </style>
 </head>
@@ -243,31 +342,64 @@
     <a href="#top" class="logo">더뱅커<span>솔루션</span></a>
     <nav>
       <ul>
+        <li><a href="#top">홈</a></li>
         <li><a href="#about">회사소개</a></li>
         <li><a href="#services">주요업무</a></li>
-        <li><a href="#representative">대표소개</a></li>
         <li><a href="#contact">상담문의</a></li>
       </ul>
     </nav>
     <a href="#contact" class="nav-cta">상담 신청</a>
-    <button class="menu-toggle" aria-label="메뉴">☰</button>
+    <button class="menu-toggle" aria-label="메뉴" aria-expanded="false">☰</button>
   </div>
 </header>
 
-<section class="hero" id="top">
-  <div class="container hero-inner">
-    <span class="hero-eyebrow">The Banker Solution</span>
-    <h1>상속·증여부터 가업승계까지, 기업의 재무 파트너 더뱅커솔루션</h1>
-    <p>은행 지점장 출신의 실무 경험과 대학교 산학협력 경력을 바탕으로, 상속증여 상담·기업컨설팅·기업재무분석·가업승계를 전문적으로 지원합니다.</p>
-    <div class="hero-buttons">
-      <a href="#contact" class="btn-primary">무료 상담 신청</a>
-      <a href="#services" class="btn-outline">주요 업무 보기</a>
+<div class="page-section active" id="top">
+  <section class="hero">
+    <div class="container hero-inner">
+      <span class="hero-eyebrow">The Banker Solution</span>
+      <h1>상속·증여부터 가업승계까지, 기업의 재무 파트너 더뱅커솔루션</h1>
+      <p>은행 지점장 출신의 실무 경험과 대학교 산학협력 경력을 바탕으로, 상속증여 상담·기업컨설팅·기업재무분석·가업승계를 전문적으로 지원합니다.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary">무료 상담 신청</a>
+        <a href="#services" class="btn-outline">주요 업무 보기</a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="about" id="about">
+  <section class="intro" id="intro">
+    <div class="intro-photo-mask"></div>
+    <div class="container intro-inner">
+      <span class="intro-eyebrow">Why The Banker Solution</span>
+      <h2>은행 현장에서 검증된 재무 전문성</h2>
+      <p>더뱅커솔루션은 은행 지점장으로서 다양한 개인·기업 고객을 직접 상담해 온 실무 경험과, 대학교 산학협력 현장에서 쌓은 컨설팅 노하우를 바탕으로 상속증여·기업재무·가업승계 전 과정을 함께합니다. 단순한 상품 권유가 아닌, 고객의 상황을 깊이 이해한 뒤 장기적인 관점에서 실질적인 해법을 제시합니다.</p>
+      <div class="intro-stats">
+        <div class="stat"><strong>30+</strong><span>년 금융업 실무 경력</span></div>
+        <div class="stat"><strong>다수</strong><span>기업·개인 상담 사례</span></div>
+        <div class="stat"><strong>100%</strong><span>비밀보장 원칙</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="rep" id="representative">
+    <div class="container rep-grid">
+      <div class="rep-photo">대표 프로필 사진</div>
+      <div>
+        <span class="rep-eyebrow">Representative</span>
+        <h2>대표 프로필</h2>
+        <p class="rep-role">더뱅커솔루션 대표</p>
+        <ul class="rep-list">
+          <li><span class="tag">전(前)</span> 부산은행 지점장</li>
+          <li><span class="tag">전(前)</span> 인제대학교 IPP사업단 전담교수</li>
+          <li><span class="tag">현(現)</span> 삼성생명 GFC (Global Financial Consultant)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="about page-section" id="about">
   <div class="container">
+    <a href="#top" class="back-home">← 홈으로</a>
     <div class="section-head">
       <span class="section-eyebrow">About Us</span>
       <h2>신뢰할 수 있는 재무·컨설팅 파트너</h2>
@@ -290,11 +422,38 @@
         <p>일회성 상담이 아닌, 지속적인 관리와 사후관리를 통해 고객과 함께합니다.</p>
       </div>
     </div>
+
+    <div class="extra">
+      <h3 class="extra-title">상담 진행 절차</h3>
+      <div class="process-grid">
+        <div class="process-step">
+          <span class="step-num">STEP 1</span>
+          <h4>상담 신청</h4>
+          <p>전화, 이메일 또는 홈페이지를 통해 간단히 상담을 신청해 주세요.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">STEP 2</span>
+          <h4>현황 진단</h4>
+          <p>자산 현황과 기업 재무 상태를 면밀히 분석하여 문제점과 기회 요인을 파악합니다.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">STEP 3</span>
+          <h4>맞춤 전략 수립</h4>
+          <p>개인 및 기업의 상황에 맞는 절세·승계·재무 전략을 구체적으로 설계합니다.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">STEP 4</span>
+          <h4>실행 및 사후관리</h4>
+          <p>수립된 전략을 실행하고, 이후에도 지속적인 모니터링과 관리를 제공합니다.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section id="services">
+<section class="page-section" id="services">
   <div class="container">
+    <a href="#top" class="back-home">← 홈으로</a>
     <div class="section-head">
       <span class="section-eyebrow">Our Services</span>
       <h2>주요 업무</h2>
@@ -322,27 +481,24 @@
         <p>세대 간 원활한 기업 승계를 위한 사전 계획 수립과 실행 전략을 지원합니다.</p>
       </div>
     </div>
-  </div>
-</section>
 
-<section class="rep" id="representative">
-  <div class="container rep-grid">
-    <div class="rep-photo">대표 프로필 사진</div>
-    <div>
-      <span class="rep-eyebrow">Representative</span>
-      <h2>대표 프로필</h2>
-      <p class="rep-role">더뱅커솔루션 대표</p>
-      <ul class="rep-list">
-        <li><span class="tag">전(前)</span> 부산은행 지점장</li>
-        <li><span class="tag">전(前)</span> 인제대학교 IPP사업단 전담교수</li>
-        <li><span class="tag">현(現)</span> 삼성생명 GFC (Global Financial Consultant)</li>
-      </ul>
+    <div class="extra">
+      <h3 class="extra-title">이런 분들께 추천합니다</h3>
+      <div class="recommend">
+        <ul class="recommend-list">
+          <li>사전에 상속·증여 계획을 세워 합리적으로 절세하고 싶은 자산가</li>
+          <li>기업의 재무 건전성을 객관적인 시각에서 점검받고 싶은 경영자</li>
+          <li>자녀 세대에게 원활하게 기업을 물려주고자 준비 중인 오너</li>
+          <li>은행 실무 경험을 갖춘 전문가에게 실질적인 조언을 받고 싶은 분</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="contact">
+<section class="page-section" id="contact">
   <div class="container">
+    <a href="#top" class="back-home">← 홈으로</a>
     <div class="section-head">
       <span class="section-eyebrow">Contact</span>
       <h2>상담 문의</h2>
@@ -390,6 +546,28 @@
         <button type="submit" class="form-submit">상담 신청하기</button>
       </form>
     </div>
+
+    <div class="extra">
+      <h3 class="extra-title">자주 묻는 질문</h3>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q">Q. 첫 상담에도 비용이 발생하나요?</div>
+          <div class="faq-a">최초 상담은 무료로 진행됩니다. 이후 진행되는 절차와 비용은 사전에 충분히 안내드린 후 진행합니다.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Q. 상담은 얼마나 걸리나요?</div>
+          <div class="faq-a">사안의 규모에 따라 다르지만, 초기 상담은 보통 1시간 내외로 진행되며 이후 필요에 따라 추가 미팅을 잡습니다.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Q. 방문하지 않고 전화나 온라인으로도 상담이 가능한가요?</div>
+          <div class="faq-a">네, 가능합니다. 전화 또는 이메일로 먼저 문의 주시면 편하신 방식으로 일정을 조율해 드립니다.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Q. 상담 내용의 비밀은 보장되나요?</div>
+          <div class="faq-a">상담 과정에서 알게 된 모든 정보는 철저히 비밀로 유지되며, 고객 동의 없이 제3자에게 제공되지 않습니다.</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -400,5 +578,65 @@
   </div>
 </footer>
 
+<script>
+  (function(){
+    var sections = document.querySelectorAll('.page-section');
+    var navLinks = document.querySelectorAll('nav a');
+    var headerEl = document.querySelector('header');
+    var menuToggle = document.querySelector('.menu-toggle');
+
+    function closeMobileMenu(){
+      headerEl.classList.remove('nav-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    menuToggle.addEventListener('click', function(e){
+      e.stopPropagation();
+      var open = headerEl.classList.toggle('nav-open');
+      menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    navLinks.forEach(function(a){
+      a.addEventListener('click', closeMobileMenu);
+    });
+
+    document.addEventListener('click', function(e){
+      if(headerEl.classList.contains('nav-open') && !headerEl.contains(e.target)){
+        closeMobileMenu();
+      }
+    });
+
+    function showPage(id){
+      var el = document.getElementById(id) || document.getElementById('top');
+      var pageSection = el.closest('.page-section') || document.getElementById('top');
+      var wasActive = pageSection.classList.contains('active');
+
+      sections.forEach(function(s){ s.classList.toggle('active', s === pageSection); });
+      navLinks.forEach(function(a){
+        a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+      });
+
+      if(el === pageSection){
+        if(!wasActive) window.scrollTo(0, 0);
+      } else {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      if(!wasActive){
+        pageSection.classList.remove('page-enter');
+        void pageSection.offsetWidth;
+        pageSection.classList.add('page-enter');
+      }
+    }
+
+    window.addEventListener('hashchange', function(){
+      showPage(location.hash.replace('#', '') || 'top');
+    });
+
+    document.addEventListener('DOMContentLoaded', function(){
+      showPage(location.hash.replace('#', '') || 'top');
+    });
+  })();
+</script>
 </body>
 </html>
